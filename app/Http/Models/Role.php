@@ -5,7 +5,7 @@ namespace App\Http\Models;
 use App\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Role extends Model {
 
@@ -17,8 +17,8 @@ class Role extends Model {
         'role_name'
     ];
 
-    public function users(): HasMany {
-        return $this->hasMany(User::class, 'user_roles');
+    public function users(): BelongsToMany {
+        return $this->belongsToMany(User::class, 'user_roles', 'user_id', 'role_id');
     }
 
     public function getRoleNameAttribute() {

@@ -16,14 +16,41 @@ class CreateFoodsTable extends Migration
         Schema::create('foods', function (Blueprint $table) {
             $table->id();
             $table->string('food_name', 150);
-            $table->double('value_per');
-            $table->string('unit_type', 10);
-            $table->double('serving_size');
-            $table->double('calories');
-            $table->string('group', 150);
-            $table->string('food_type', 150);
-            $table->string('path_image', 500);
+            $table->double('quantity');
+            $table->string('measure_type', 10);
+            $table->double('energy_value');
+            $table->double('carbohydrates');
+            $table->double('sugars')->nullable();
+            $table->double('proteins')->nullable();
+            $table->double('fats')->nullable();
+            $table->double('dietary_fiber')->nullable();
+            $table->double('sodium')->nullable();
+            $table->double('other')->nullable();
             $table->timestamps();
+        });
+
+        Schema::create('food_types', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('food_id')
+            ->references('id')
+            ->on('foods')
+            ->onDelete('restrict')
+            ->cascadeOnUpdate();
+            $table->enum('group', [1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            $table->enum('food_type', ['PÃES E CERAIS', 'LEITE E DERIVADOS', 'FRUTAS', 'VEGETAIS A', 'VEGETAIS B', 'CARNES', 'ARROZ, MASSAS, TUBÉRCULOS', 'LEGUMINOSAS', 'CASTANHAS, SEMENTES']);
+        });
+
+        Schema::create('user_foods', function (Blueprint $table) {
+            $table->foreignId('food_id')
+            ->references('id')
+            ->on('foods')
+            ->onDelete('restrict')
+            ->cascadeOnUpdate();
+            $table->foreignId('user_id')
+            ->references('id')
+            ->on('users')
+            ->cascadeOnDelete()
+            ->cascadeOnUpdate();
         });
     }
 
@@ -34,6 +61,8 @@ class CreateFoodsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('food');
+        Schema::dropIfExists('user_foods');
+        Schema::dropIfExists('food_types');
+        Schema::dropIfExists('foods');
     }
 }

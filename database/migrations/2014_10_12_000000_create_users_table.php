@@ -30,15 +30,15 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('user_roles', function (Blueprint $table) {
-            $table->foreignId('role_id')
-            ->references('id')
-            ->on('roles')
-            ->onDelete('restrict')
-            ->cascadeOnUpdate();
             $table->foreignId('user_id')
             ->references('id')
             ->on('users')
             ->cascadeOnDelete()
+            ->cascadeOnUpdate();
+            $table->foreignId('role_id')
+            ->references('id')
+            ->on('roles')
+            ->onDelete('restrict')
             ->cascadeOnUpdate();
         });
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePeopleTable extends Migration
+class CreateProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,21 @@ class CreatePeopleTable extends Migration
      */
     public function up()
     {
-        Schema::create('people', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
             ->references('id')
             ->on('users')
             ->cascadeOnUpdate()
-            ->cascadeOnDelete();
-            $table->time('birthday_date');
+            ->cascadeOnDelete()
+            ->unique();
+            $table->date('birthday');
             $table->double('weight');
             $table->double('height');
             $table->double('goal');
-            $table->double('metabolism');
+            $table->double('metabolism')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -36,6 +38,6 @@ class CreatePeopleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('person');
+        Schema::dropIfExists('profiles');
     }
 }
