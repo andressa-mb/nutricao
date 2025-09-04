@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Food extends Model
 {
@@ -20,6 +21,10 @@ class Food extends Model
 
     public function food_type(): HasOne {
         return $this->hasOne(FoodType::class, 'food_id', 'id');
+    }
+
+    public function image(): MorphOne {
+        return $this->morphOne(Image::class, 'imageable');
     }
 
 }
