@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class FoodType extends Model
 {
+    public $timestamps = false;
     protected $table = 'food_types';
     protected $fillable = [
         'food_id', 'group', 'food_type'

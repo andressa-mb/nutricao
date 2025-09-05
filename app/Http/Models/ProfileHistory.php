@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProfileHistory extends Model
 {
+    public $timestamps = false;
     protected $table = 'profile_histories';
     protected $fillable = [
         'profile_id', 'weight_prev', 'goal_prev', 'metabolism_prev', 'recorded_at',
