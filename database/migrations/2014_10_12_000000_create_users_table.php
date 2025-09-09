@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
@@ -50,7 +51,7 @@ class CreateUsersTable extends Migration
         ]);
 
         DB::table('users')->insert([
-            ['id' => 1, 'name' => 'Andressa', 'email' => 'admin@email.com', 'password' => '12345678']
+            ['id' => 1, 'name' => 'Andressa', 'email' => 'admin@email.com', 'password' => Hash::make('12345678')]
         ]);
 
         DB::table('user_roles')->insert([
