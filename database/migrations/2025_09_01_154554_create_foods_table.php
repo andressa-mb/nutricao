@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateFoodsTable extends Migration
@@ -29,18 +30,27 @@ class CreateFoodsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('food_types', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
+            $table->id();
+            $table->string('group_type', 250);
+        });
+
+        Schema::create('food_groups', function (Blueprint $table) {
             $table->id();
             $table->foreignId('food_id')
             ->references('id')
             ->on('foods')
             ->onDelete('restrict')
             ->cascadeOnUpdate();
-            $table->enum('group', [1, 2, 3, 4, 5, 6, 7, 8, 9]);
-            $table->enum('food_type', ['PÃES E CERAIS', 'LEITE E DERIVADOS', 'FRUTAS', 'VEGETAIS A', 'VEGETAIS B', 'CARNES', 'ARROZ, MASSAS, TUBÉRCULOS', 'LEGUMINOSAS', 'CASTANHAS, SEMENTES']);
+            $table->foreignId('group_id')
+            ->references('id')
+            ->on('groups')
+            ->onDelete('restrict')
+            ->cascadeOnUpdate();
         });
 
         Schema::create('user_foods', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('food_id')
             ->references('id')
             ->on('foods')
@@ -52,6 +62,18 @@ class CreateFoodsTable extends Migration
             ->cascadeOnDelete()
             ->cascadeOnUpdate();
         });
+
+        DB::table('groups')->insert([
+            ['id' => 1, 'group_type' => 'PÃES E CERAIS'],
+            ['id' => 2, 'group_type' => 'LEITE E DERIVADOS'],
+            ['id' => 3, 'group_type' => 'FRUTAS'],
+            ['id' => 4, 'group_type' => 'VEGETAIS A'],
+            ['id' => 5, 'group_type' => 'VEGETAIS B'],
+            ['id' => 6, 'group_type' => 'CARNES'],
+            ['id' => 7, 'group_type' => 'ARROZ, MASSAS, TUBÉRCULOS'],
+            ['id' => 8, 'group_type' => 'LEGUMINOSAS'],
+            ['id' => 9, 'group_type' => 'CASTANHAS, SEMENTES'],
+        ]);
     }
 
     /**
@@ -62,7 +84,8 @@ class CreateFoodsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('user_foods');
-        Schema::dropIfExists('food_types');
+        Schema::dropIfExists('food_groups');
+        Schema::dropIfExists('groups');
         Schema::dropIfExists('foods');
     }
 }

@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('user_roles', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('user_id')
             ->references('id')
             ->on('users')
@@ -46,6 +47,14 @@ class CreateUsersTable extends Migration
         DB::table('roles')->insert([
             ['id' => 1, 'role_name' => 'ADMIN'],
             ['id' => 2, 'role_name' => 'STANDARD'],
+        ]);
+
+        DB::table('users')->insert([
+            ['id' => 1, 'name' => 'Andressa', 'email' => 'admin@email.com', 'password' => '12345678']
+        ]);
+
+        DB::table('user_roles')->insert([
+            ['user_id' => 1, 'role_id' => 1]
         ]);
     }
 

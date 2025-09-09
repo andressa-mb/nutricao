@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Models;
+namespace App\Models;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -19,12 +19,12 @@ class Food extends Model
         return $this->belongsToMany(User::class, 'user_foods', 'food_id', 'user_id');
     }
 
-    public function food_type(): HasOne {
-        return $this->hasOne(FoodType::class, 'food_id', 'id');
+    public function groups(): BelongsToMany {
+        return $this->belongsToMany(Group::class, 'food_groups', 'food_id', 'group_id');
     }
 
     public function image(): MorphOne {
-        return $this->morphOne(Image::class, 'imageable');
+        return $this->morphOne(Image::class, 'img');
     }
 
 }

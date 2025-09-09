@@ -17,7 +17,7 @@ class CreateImagesTable extends Migration
             $table->id();
             $table->string('url', 500);
             $table->integer('img_id');
-            $table->string('img_parent', 200);
+            $table->string('img_type', 200);
             $table->timestamps();
         });
     }
