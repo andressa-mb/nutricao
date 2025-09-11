@@ -12,7 +12,7 @@ class Food extends Model
 {
     protected $table = 'foods';
     protected $fillable = [
-        'food_name', 'quantity', 'measure_type', 'energy_value', 'carbohydrates', 'sugars', 'proteins', 'fats', 'dietary_fiber', 'sodium', 'other', 'path_image', 'created_at', 'updated_at'
+        'food_name', 'quantity', 'measure_type', 'energy_value', 'carbohydrates', 'sugars', 'proteins', 'fats', 'dietary_fiber', 'sodium', 'other', 'created_at', 'updated_at'
     ];
 
     public function users(): BelongsToMany {

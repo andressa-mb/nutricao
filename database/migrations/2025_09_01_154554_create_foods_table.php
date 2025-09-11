@@ -40,12 +40,12 @@ class CreateFoodsTable extends Migration
             $table->foreignId('food_id')
             ->references('id')
             ->on('foods')
-            ->onDelete('restrict')
+            ->cascadeOnDelete()
             ->cascadeOnUpdate();
             $table->foreignId('group_id')
             ->references('id')
             ->on('groups')
-            ->onDelete('restrict')
+            ->cascadeOnDelete()
             ->cascadeOnUpdate();
         });
 
@@ -54,7 +54,7 @@ class CreateFoodsTable extends Migration
             $table->foreignId('food_id')
             ->references('id')
             ->on('foods')
-            ->onDelete('restrict')
+            ->cascadeOnDelete()
             ->cascadeOnUpdate();
             $table->foreignId('user_id')
             ->references('id')

@@ -2,10 +2,10 @@
 
 namespace App;
 
-use App\Http\Models\Food;
-use App\Http\Models\Image;
-use App\Http\Models\Profile;
-use App\Http\Models\Role;
+use App\Models\Food;
+use App\Models\Image;
+use App\Models\Profile;
+use App\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -41,7 +41,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime:d-m-Y',
+        'created_at' => 'datetime:d-m-Y',
+        'updated_at' => 'datetime:d-m-Y',
     ];
 
     public function roles(): BelongsToMany {
@@ -57,7 +59,7 @@ class User extends Authenticatable
     }
 
     public function image(): MorphOne {
-        return $this->morphOne(Image::class, 'imageable');
+        return $this->morphOne(Image::class, 'img');
     }
 
 }
