@@ -27,7 +27,6 @@ class CreateProfilesTable extends Migration
             $table->double('goal');
             $table->double('metabolism')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
