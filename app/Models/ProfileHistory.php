@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Profile;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class ProfileHistory extends Model
 {
@@ -20,5 +21,9 @@ class ProfileHistory extends Model
 
     public function profile(): BelongsTo {
         return $this->belongsTo(Profile::class, 'profile_id', 'id');
+    }
+
+    public function image(): MorphOne {
+        return $this->morphOne(Image::class, 'img');
     }
 }

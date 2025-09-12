@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Profile extends Model
 {
@@ -25,5 +26,9 @@ class Profile extends Model
 
     public function histories(): HasMany {
         return $this->hasMany(ProfileHistory::class, 'profile_id', 'id');
+    }
+
+    public function image(): MorphOne {
+        return $this->morphOne(Image::class, 'img');
     }
 }
