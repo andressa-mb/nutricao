@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Models\Role;
+use App\Models\Role;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Auth\Traits\ValidatorUser;
 
 class RegisterController extends Controller
 {
@@ -24,6 +24,7 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+    use ValidatorUser;
 
     /**
      * Where to redirect users after registration.
@@ -43,21 +44,6 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
-
-    /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
@@ -65,14 +51,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $request = request();
+        $this->validatorImage($request->all())->validate();
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
 
+        if ($request->hasFile('image')) {
+            $extension = $request->image->extension();
+            $path = $request->image->storeAs('users', "user_$user->id.$extension", 'public');
+
+            $user->image()->create([
+                'url' => $path,
+            ]);
+        };
+
         $role = Role::standard()->first();
         $user->roles()->sync($role->id);
+
         return $user;
     }
 }
