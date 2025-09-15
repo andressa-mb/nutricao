@@ -31,6 +31,14 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{route('home')}}">HOME</a>
+                        <a class="dropdown-item" href="{{ route('my-data')}}">Meus dados</a>
+                        <a class="dropdown-item" href="{{ route('my-body-profile')}}">Meu perfil</a>
+                        @if (Auth::user()->roles()->admin()->exists())
+                            <hr>
+                            <a class="dropdown-item" href="{{ route('users')}}">Usuários</a>
+                        @endif
+                        <hr>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
