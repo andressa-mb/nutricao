@@ -20,17 +20,21 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app" class="container-fluid m-0 p-0 w-100">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div id="app" class="container-fluid m-0 w-100">
+        <nav class="row navbar navbar-expand-md navbar-light bg-white shadow-sm">
             @include('navbar.header-navbar')
         </nav>
 
         <main class="py-4">
-            @if (session('message') || $errors->any())
+            @if (session('message') || session('warning') || $errors->any())
                 <div id="message" class="col">
                     @if (session('message'))
                         <div class="alert alert-success">
                             {{ session('message') }}
+                        </div>
+                    @elseif (session('warning'))
+                        <div class="alert alert-danger">
+                            {{ session('warning') }}
                         </div>
                     @endif
                     @if ($errors->any())
