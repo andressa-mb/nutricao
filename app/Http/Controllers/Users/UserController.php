@@ -88,11 +88,18 @@ class UserController extends Controller
 
             if($request->has('image')){
                 $this->validatorImage(['image' => $request->image])->validate();
-                $path = $this->editImage($request->image, $userToEdit);
+                $type = $userToEdit->image ? 'edit' : 'create';
+                $path = $this->editOrCreateImage($request->image, $userToEdit);
 
-                $userToEdit->image()->create([
-                    'url' => $path,
-                ]);
+                if ($type == 'edit'){
+                    $userToEdit->image()->update([
+                        'url' => $path,
+                    ]);
+                } else {
+                    $userToEdit->image()->create([
+                        'url' => $path,
+                    ]);
+                }
             }
 
             $userToEdit->update([

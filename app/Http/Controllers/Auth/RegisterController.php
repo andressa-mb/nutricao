@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Auth\Traits\ValidatorUser;
+use App\Http\Controllers\Traits\Images\ImageStorage;
 
 class RegisterController extends Controller
 {
@@ -25,6 +26,7 @@ class RegisterController extends Controller
 
     use RegistersUsers;
     use ValidatorUser;
+    use ImageStorage;
 
     /**
      * Where to redirect users after registration.
@@ -61,9 +63,7 @@ class RegisterController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $extension = $request->image->extension();
-            $path = $request->image->storeAs('users', "user_$user->id.$extension", 'public');
-
+            $path = $this->editOrCreateImage($request->image, $user);
             $user->image()->create([
                 'url' => $path,
             ]);
