@@ -7,7 +7,6 @@ use App\Http\Controllers\Auth\Traits\ValidatorUser;
 use App\Http\Controllers\Traits\Images\ImageStorage;
 use App\User;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -151,7 +150,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('home')->with('message', 'Senha alterada com sucesso!');
+        return redirect()->route('main-page')->with('message', 'Senha alterada com sucesso!');
     }
 
     /**
@@ -159,7 +158,7 @@ class UserController extends Controller
      */
     public function destroy(int $userId)
     {
-        if($this->user()->id == $userId || $this->isAdmin()){
+        if($this->userId() == $userId || $this->isAdmin()){
             $userToDelete = User::find($userId);
 
             if(!is_null($userToDelete->image)){

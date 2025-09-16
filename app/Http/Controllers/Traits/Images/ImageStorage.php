@@ -25,9 +25,9 @@ trait ImageStorage {
 
 
     //Deletar imagem
-    public function deleteImage($model): Image{
+    public function deleteImage($model): void{
         Storage::disk('public')->delete($model->image->url);//deletando da pasta storage
-        return $model->image()->delete(); //deletando do banco
+        $model->image()->delete(); //deletando do banco
     }
 
 }
