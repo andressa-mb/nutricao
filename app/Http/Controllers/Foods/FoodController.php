@@ -75,8 +75,6 @@ class FoodController extends Controller
             return redirect()->route('main-page')->withErrors('Página apenas para administradores.');
         }
 
-        app()->make(DecimalSeparator::class)->changeDecimalToValidate($request->only(['quantity', 'energy_value', 'carbohydrates', 'sugars', 'proteins', 'fats', 'dietary_fiber', 'sodium', 'other']));
-
         $validated = $request->validated();
         $food = Food::create($validated);
 
@@ -116,9 +114,6 @@ class FoodController extends Controller
         }
 
         $food = Food::find($foodId);
-
-        app()->make(DecimalSeparator::class)->changeDecimalToValidate($request->only(['quantity', 'energy_value', 'carbohydrates', 'sugars', 'proteins', 'fats', 'dietary_fiber', 'sodium', 'other']));
-
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {

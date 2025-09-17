@@ -25,10 +25,10 @@ class FoodRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'nullable|file|image|mimes:png,jpg,jpeg',
+            'image' => 'nullable|file|image',
             'food_name' => 'required|string|max:150',
             'quantity' => 'required|numeric',
-            'measure_type' => 'required|string|max:10',
+            'measure_type' => 'required|string|max:30',
             'energy_value' => 'required|numeric',
             'carbohydrates' => 'required|numeric',
             'sugars' => 'nullable|numeric',
@@ -44,7 +44,7 @@ class FoodRequest extends FormRequest
     public function messages()
     {
         return [
-            'image.mimes' => 'O arquivo deve ser em um dos formatos: png, jpg ou jpeg.',
+            'image.image' => 'O arquivo deve ser uma imagem, ex dos formatos: png, jpg ou jpeg, etc.',
             'food_name.required' => 'O nome do alimento é obrigatório.',
             'food_name.max' => 'Passou do limite de caracteres, máximo de 150.',
             'quantity.required' => 'Quantidade obrigatória.',

@@ -18,7 +18,7 @@ class CreateFoodsTable extends Migration
             $table->id();
             $table->string('food_name', 150);
             $table->double('quantity');
-            $table->string('measure_type', 10);
+            $table->string('measure_type', 30);
             $table->double('energy_value');
             $table->double('carbohydrates');
             $table->double('sugars')->nullable();
