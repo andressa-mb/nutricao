@@ -2,7 +2,7 @@
 @section('content')
     <div class="row">
         <div class="col-12 d-flex justify-content-around align-self-center">
-            <div class="card my-3" style="width: 18rem;">
+            <div class="card my-3" style="width: 22rem;">
                 @if (!is_null($user->image))
                     <img class="card-img-top" src="{{Storage::url($user->image->url)}}" alt="{{$user->image->id}}">
                 @endif
@@ -12,6 +12,7 @@
                         <input type="hidden" value="{{$user->id}}" name="{{$user->id}}">
                         <li><strong>Nome: </strong>{{$user->name}}</li>
                         <li><strong>E-mail: </strong>{{$user->email}}</li>
+                        <li><strong>Data de nascimento: </strong>{{$user->birthday->format('d/m/Y')}}</li>
                         <li><strong>Inscrito desde: </strong> {{$user->created_at->format('d/m/Y')}}</li>
                         <li><strong>Perfil: </strong>{{$user->roles()->first()->role_name}}</li>
                         <li><strong>Senha: </strong>{{str_replace($user->password, "*********", $user->password)}}</li>

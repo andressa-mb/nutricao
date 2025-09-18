@@ -26,6 +26,10 @@
                     <input type="email" class="form-control" id="user_email" name="user_email" value="{{$user->email}}" required>
                 </div>
                 <div class="form-group">
+                    <label for="user_birthday">Data de nascimento:</label>
+                    <input type="date" class="form-control" id="user_birthday" name="user_birthday" value="{{$user->birthday}}" required>
+                </div>
+                <div class="form-group">
                     <label for="senha">Senha:</label>
                     <div>
                         <a href="{{route('confirm-pass-form')}}" class="form-control btn btn-warning">Trocar senha</a>

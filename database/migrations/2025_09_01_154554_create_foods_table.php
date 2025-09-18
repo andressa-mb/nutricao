@@ -26,7 +26,8 @@ class CreateFoodsTable extends Migration
             $table->double('fats')->nullable();
             $table->double('dietary_fiber')->nullable();
             $table->double('sodium')->nullable();
-            $table->double('other')->nullable();
+            $table->double('other_value')->nullable();
+            $table->string('other_type', 30)->nullable();
             $table->timestamps();
         });
 
