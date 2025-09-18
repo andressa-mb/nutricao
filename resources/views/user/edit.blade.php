@@ -26,6 +26,21 @@
                     <input type="email" class="form-control" id="user_email" name="user_email" value="{{$user->email}}" required>
                 </div>
                 <div class="form-group">
+                    <p>Sexo:</p>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sex" id="female" value="F" >
+                        <label class="form-check-label" for="female">
+                            Feminino
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sex" id="male" value="M" >
+                        <label class="form-check-label" for="male">
+                            Masculino
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="user_birthday">Data de nascimento:</label>
                     <input type="date" class="form-control" id="user_birthday" name="user_birthday" value="{{$user->birthday}}" required>
                 </div>

@@ -19,6 +19,7 @@ trait ValidatorUser {
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'birthday' => ['required', 'date', 'after_or_equal:1900-01-01'],
+            'sex' => ['required', 'string', 'size:1'],
         ]);
     }
 

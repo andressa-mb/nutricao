@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->date('birthday');
+            $table->char('sex', 1);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
@@ -52,7 +53,7 @@ class CreateUsersTable extends Migration
         ]);
 
         DB::table('users')->insert([
-            ['id' => 1, 'name' => 'Andressa', 'email' => 'andressa@email.com', 'birthday' => '1993-08-26', 'password' => Hash::make('12345678'), "created_at" => "2025-09-10",
+            ['id' => 1, 'name' => 'Andressa', 'email' => 'andressa@email.com', 'birthday' => '1993-08-26', 'sex' => 'F', 'password' => Hash::make('12345678'), "created_at" => "2025-09-10",
             "updated_at" => "2025-09-10"]
         ]);
 

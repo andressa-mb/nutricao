@@ -59,6 +59,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($userId)],
             'birthday' => ['required', 'date', 'after_or_equal:1900-01-01'],
+            'sex' => ['required', 'string', 'size:1'],
         ]);
     }
 
@@ -84,6 +85,7 @@ class UserController extends Controller
             $data['name'] = $request->input('user_name');
             $data['email'] = $request->input('user_email');
             $data['birthday'] = $request->input('user_birthday');
+            $data['sex'] = $request->input('sex');
             $this->validator($data, $userToEdit->id)->validate();
 
             if($request->has('image')){
@@ -106,6 +108,7 @@ class UserController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'birthday' => $data['birthday'],
+                'sex' => $data['sex'],
             ]);
         }
         return redirect()->route('my-data')->with('message', 'Atualizado com sucesso.');

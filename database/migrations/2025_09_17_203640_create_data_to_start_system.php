@@ -24,16 +24,15 @@ class CreateDataToStartSystem extends Migration
         //USUÁRIOS
         DB::table('users')->insert([
             [
-				'id' => 2, 'name' => 'Pedro Martins', 'email' => 'pedro@email.com', 'birthday' => '1998-03-15', 'password' => Hash::make('12345678'), "created_at" => "2025-09-12",
+				'id' => 2, 'name' => 'Pedro Martins', 'email' => 'pedro@email.com', 'birthday' => '1998-03-15', 'sex' => 'M', 'password' => Hash::make('12345678'), "created_at" => "2025-09-12",
                 "updated_at" => "2025-09-12"
 			],
 			[
-				'id' => 3, 'name' => 'Mariana Lima', 'email' => 'mariana123@email.com', 'birthday' => '2001-07-21', 'password' => Hash::make('12345678'), "created_at" => "2025-09-14",
+				'id' => 3, 'name' => 'Mariana Lima', 'email' => 'mariana123@email.com', 'birthday' => '2001-07-21', 'sex' => 'F', 'password' => Hash::make('12345678'), "created_at" => "2025-09-14",
                 "updated_at" => "2025-09-14"
 			],
 			[
-				'id' => 4, 'name' => 'Caio Silva', 'email' => 'caio@email.com', 'birthday' => '1996-02-17', 'password' => Hash::make('12345678'), "created_at" => "2025-09-14",
-                "updated_at" => "2025-09-14"
+				'id' => 4, 'name' => 'Caio Silva', 'email' => 'caio@email.com', 'birthday' => '1996-02-17', 'sex' => 'M', 'password' => Hash::make('12345678'), "created_at" => "2025-09-14", "updated_at" => "2025-09-14"
 			],
         ]);
 

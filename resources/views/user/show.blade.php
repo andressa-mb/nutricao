@@ -13,6 +13,7 @@
                         <li><strong>Nome: </strong>{{$user->name}}</li>
                         <li><strong>E-mail: </strong>{{$user->email}}</li>
                         <li><strong>Data de nascimento: </strong>{{$user->birthday->format('d/m/Y')}}</li>
+                        <li><strong>Sexo: </strong>{{$user->sex == 'F' ? 'Feminino' : 'Masculino'}}</li>
                         <li><strong>Inscrito desde: </strong> {{$user->created_at->format('d/m/Y')}}</li>
                         <li><strong>Perfil: </strong>{{$user->roles()->first()->role_name}}</li>
                         <li><strong>Senha: </strong>{{str_replace($user->password, "*********", $user->password)}}</li>

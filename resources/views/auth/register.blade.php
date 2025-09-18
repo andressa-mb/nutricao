@@ -52,6 +52,29 @@
                         </div>
 
                         <div class="form-group row">
+                            <p class="col-md-4 col-form-label text-md-right">Sexo:</p>
+                            <div class="col-md-8">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="sex" id="female" value="F" >
+                                    <label class="form-check-label" for="female">
+                                        Feminino
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="sex" id="male" value="M" >
+                                    <label class="form-check-label" for="male">
+                                        Masculino
+                                    </label>
+                                </div>
+                                @error('sex')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
