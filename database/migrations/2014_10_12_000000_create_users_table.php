@@ -52,7 +52,8 @@ class CreateUsersTable extends Migration
         ]);
 
         DB::table('users')->insert([
-            ['id' => 1, 'name' => 'Andressa', 'email' => 'andressa@email.com', 'birthday' => '1993-08-26', 'password' => Hash::make('12345678')]
+            ['id' => 1, 'name' => 'Andressa', 'email' => 'andressa@email.com', 'birthday' => '1993-08-26', 'password' => Hash::make('12345678'), "created_at" => "2025-09-10",
+            "updated_at" => "2025-09-10"]
         ]);
 
         DB::table('user_roles')->insert([

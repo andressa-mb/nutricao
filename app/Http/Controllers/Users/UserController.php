@@ -52,12 +52,13 @@ class UserController extends Controller
 
     }
 
-    //Trait Validador do name e email
+    //Trait Validador do name e email, birthday
     protected function validator(array $data, $userId)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($userId)],
+            'birthday' => ['required', 'date', 'after_or_equal:1900-01-01'],
         ]);
     }
 
@@ -78,12 +79,12 @@ class UserController extends Controller
             }
         }
 
-        //Somente o próprio USUÁRIO (dono do perfil) OU ADMIN, pode atualizar nome, email e imagem
+        //Somente o próprio USUÁRIO (dono do perfil) OU ADMIN, pode atualizar nome, email, nascimento e imagem
         if($this->user()->id == $userId || $this->isAdmin()){
             $data['name'] = $request->input('user_name');
             $data['email'] = $request->input('user_email');
+            $data['birthday'] = $request->input('user_birthday');
             $this->validator($data, $userToEdit->id)->validate();
-
 
             if($request->has('image')){
                 $this->validatorImage(['image' => $request->image])->validate();
@@ -103,10 +104,10 @@ class UserController extends Controller
 
             $userToEdit->update([
                 'name' => $data['name'],
-                'email' => $data['email']
+                'email' => $data['email'],
+                'birthday' => $data['birthday'],
             ]);
         }
-
         return redirect()->route('my-data')->with('message', 'Atualizado com sucesso.');
     }
 
