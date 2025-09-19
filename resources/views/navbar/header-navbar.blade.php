@@ -34,7 +34,8 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('my-data')}}">Meus dados</a>
                     <a class="dropdown-item" href="{{ route('my-body-profile')}}">Meu perfil</a>
-                    <a class="dropdown-item" href="{{route('list-foods')}}">Alimentos Favoritos</a>
+                    <a class="dropdown-item" href="{{route('add-favorite-foods')}}">Meus Alimentos Favoritos</a>
+                    <a class="dropdown-item" href="{{ route('list-foods')}}">Alimentos</a>
                     @if (Auth::user()->roles()->admin()->exists())
                         <hr>
                         <a class="dropdown-item" href="{{ route('foods')}}">Alimentos</a>

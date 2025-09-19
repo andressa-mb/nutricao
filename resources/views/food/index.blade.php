@@ -29,7 +29,7 @@
                                 <li><strong>Gordura: </strong>{{$food->fats}}</li>
                                 <li><strong>Fibra: </strong>{{$food->dietary_fiber}}</li>
                                 <li><strong>Sódio: </strong>{{$food->sodium}}</li>
-                                <li><strong>Outros: </strong>{{$food->other}}</li>
+                                <li><strong>Outros: </strong>{{$food->other_value}} {{$food->other_type}}</li>
                             </ul>
                         </div>
                         <div class="card-footer d-flex justify-content-around">

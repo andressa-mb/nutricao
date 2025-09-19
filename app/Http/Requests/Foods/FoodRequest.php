@@ -36,7 +36,8 @@ class FoodRequest extends FormRequest
             'fats' => 'nullable|numeric',
             'dietary_fiber' => 'nullable|numeric',
             'sodium' => 'nullable|numeric',
-            'other' => 'nullable|numeric',
+            'other_value' => 'nullable|numeric',
+            'other_type' => 'nullable|string|max:30',
             'group_type' => 'required',
         ];
     }
@@ -51,6 +52,8 @@ class FoodRequest extends FormRequest
             'quantity.required' => 'Quantidade obrigatória.',
             'quantity.numeric' => 'Quantidade deve ser numérico.',
             'measure_type.required' => 'Medida é obrigatória.',
+            'measure_type.string' => 'Deve ser texto.',
+            'measure_type.max' => 'Passou do limite de caracteres, máximo de 30.',
             'energy_value.required' => 'Valor energético é obrigatório.',
             'energy_value.numeric' => 'Valor energético deve ser numérico.',
             'carbohydrates.required' => 'Carboidratos é obrigatório.',
@@ -60,7 +63,9 @@ class FoodRequest extends FormRequest
             'fats.numeric' => 'Gordura deve ser numérico.',
             'dietary_fiber.numeric' => 'Fibra deve ser numérico.',
             'sodium.numeric' => 'Sódio deve ser numérico.',
-            'other.numeric' => 'Outros deve ser numérico.',
+            'other_value.numeric' => 'Outros (valor) deve ser numérico.',
+            'other_type.string' => 'Deve ser texto.',
+            'other_type.max' => 'Passou do limite de caracteres, máximo de 30.',
             'group_type.required' => 'Tipo de alimento é obrigatório.',
         ];
     }

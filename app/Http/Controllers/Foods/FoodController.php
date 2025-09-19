@@ -6,7 +6,6 @@ use App\Models\Food;
 use App\Http\Controllers\Admin\AdminController as Controller;
 use App\Http\Controllers\Traits\Images\ImageStorage;
 use App\Http\Requests\Foods\FoodRequest;
-use App\Services\Foods\DecimalSeparator;
 use Illuminate\Http\Request;
 use Throwable;
 
@@ -14,12 +13,18 @@ class FoodController extends Controller
 {
     use ImageStorage;
 
+    /**
+     * Lista dos alimentos existentes no sistema.
+     */
+    public function listFoods(){
+        return view('food.listFoods', ['foods' => Food::paginate()]);
+    }
     //TODOS OS USUÁRIOS
     /**
      * Lista dos alimentos existentes para seleção dos favoritos.
      */
-    public function listOfFoods(){
-        return view('food.list', ['foods' => Food::paginate()]);
+    public function addFavoriteFoods(){
+        return view('food.listToAddFavorites', ['foods' => Food::paginate()]);
     }
 
     /**

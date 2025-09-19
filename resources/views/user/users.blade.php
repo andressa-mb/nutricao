@@ -1,6 +1,6 @@
 <div class="card my-3" style="width: 22rem;">
     @if (!is_null($user->image))
-        <img class="card-img-top" src="{{Storage::url($user->image->url)}}" alt="{{$user->image->id}}">
+        <img class="card-img-top" height="250" src="{{Storage::url($user->image->url)}}" alt="{{$user->image->id}}">
     @endif
     <div class="card-body">
         <h5 class="card-title">{{$user->name}}</h5>
