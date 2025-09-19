@@ -15,6 +15,7 @@
                 <div class="form-group">
                     <label for="image">Imagem:</label>
                     <input type="file" class="form-control" id="image" name="image">
+                    <p class="text-danger">Limite máximo da imagem: 2MB</p>
                 </div>
 
                 <div class="form-group">
@@ -28,13 +29,13 @@
                 <div class="form-group">
                     <p>Sexo:</p>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sex" id="female" value="F" >
+                        <input class="form-check-input" type="radio" name="sex" id="female" value="F" @if ($user->sex == 'F') checked @endif>
                         <label class="form-check-label" for="female">
                             Feminino
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sex" id="male" value="M" >
+                        <input class="form-check-input" type="radio" name="sex" id="male" value="M" @if ($user->sex == 'M') checked @endif>
                         <label class="form-check-label" for="male">
                             Masculino
                         </label>
@@ -42,7 +43,7 @@
                 </div>
                 <div class="form-group">
                     <label for="user_birthday">Data de nascimento:</label>
-                    <input type="date" class="form-control" id="user_birthday" name="user_birthday" value="{{$user->birthday}}" required>
+                    <input type="date" class="form-control" id="user_birthday" name="user_birthday" value="{{$user->birthday->format('Y-m-d')}}" required>
                 </div>
                 <div class="form-group">
                     <label for="senha">Senha:</label>

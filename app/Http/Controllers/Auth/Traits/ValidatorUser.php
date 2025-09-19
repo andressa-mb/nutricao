@@ -25,7 +25,7 @@ trait ValidatorUser {
 
     protected function validatorImage($reqImage) {
         return Validator::make($reqImage, [
-            'image' => [ 'nullable', 'image', 'mimes:png,jpg,jpeg']
+            'image' => [ 'nullable', 'image', 'mimes:png,jpg,jpeg', 'max:2048']
         ]);
     }
 

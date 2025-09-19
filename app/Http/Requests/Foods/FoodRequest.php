@@ -25,7 +25,7 @@ class FoodRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'nullable|file|image',
+            'image' => 'nullable|file|image|max:2048',
             'food_name' => 'required|string|max:150',
             'quantity' => 'required|numeric',
             'measure_type' => 'required|string|max:30',
@@ -45,6 +45,7 @@ class FoodRequest extends FormRequest
     {
         return [
             'image.image' => 'O arquivo deve ser uma imagem, ex dos formatos: png, jpg ou jpeg, etc.',
+            'image.max' => 'Arquivo grande, limite de 2MB.',
             'food_name.required' => 'O nome do alimento é obrigatório.',
             'food_name.max' => 'Passou do limite de caracteres, máximo de 150.',
             'quantity.required' => 'Quantidade obrigatória.',
