@@ -1,17 +1,33 @@
 @extends('layouts.app')
 @section('content')
-  <div class="row">
-    <div class="col-12">
-      {{ $foods->links() }}
+<div class="row">
+    @component('components.modals.modal-delete', ['titleModal' => 'Excluir alimento'])
+      <p>Tem certeza que deseja excluir o alimento:
+        <strong id="foodName"></strong>
+      </p>
+    @endcomponent
+
+    <div class="mx-2 col-12">
+      @if ($is_admin)
+          <a href="{{route('create-food')}}" class="btn btn-success">Criar novo alimento</a>
+      @endif
+      <a href="{{route('my-favorite-foods')}}" class="btn btn-primary">Alimentos Favoritos</a>
     </div>
+
     <div class="col-12 py-2 my-2 bg-dark text-white text-center">
       <h2>Alimentos</h2>
     </div>
+    <div class="col-12">
+      {{ $foods->links() }}
+    </div>
     <div class="col-12 d-flex justify-content-center">
+      <form action="{{ route('save-favorite-foods') }}" method="POST" enctype="multipart/form-data">
+        @csrf
         <table class="table">
           <thead class="thead-dark">
             <tr>
               <th scope="col">ID</th>
+              <th scope="col">#</th>
               <th scope="col">Imagem</th>
               <th scope="col">Nome</th>
               <th scope="col">Quantidade</th>
@@ -23,12 +39,24 @@
               <th scope="col">Fibras (g)</th>
               <th scope="col">Sódio (mg)</th>
               <th scope="col">Outros (g)</th>
+              @if ($is_admin)
+                <th scope="col">Ações</th>
+              @endif
             </tr>
           </thead>
           <tbody>
             @foreach ($foods as $food)
               <tr class="text-center">
                 <th scope="row">{{ $food->id }}</th>
+                <td>
+                  <input
+                    type="checkbox"
+                    id="name_food_{{ $food->id }}"
+                    name="foods[]"
+                    value="{{ $food->id }}"
+                    class="mr-2"
+                  >
+                </td>
                 <td>
                   @if (!is_null($food->image))
                     <img src="{{ Storage::url($food->image->url) }}" alt="{{ $food->image->url }}" width="75" class="rounded">
@@ -44,10 +72,32 @@
                 <td>{{ $food->dietary_fiber }} g</td>
                 <td>{{ $food->sodium }} mg</td>
                 <td>{{ $food->other_value }} {{ $food->other_type }}</td>
+                @if ($is_admin)
+                  <td>
+                    <a href="{{route('edit-food', $food)}}" class="btn btn-warning">Editar</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusao" data-route="{{route('delete-food', $food)}}" data-food="{{$food->food_name}}">Excluir</button>
+                  </td>
+                @endif
               </tr>
             @endforeach
           </tbody>
         </table>
+        <button type="submit" class="btn btn-success">Adicionar aos favoritos</button>
+      </form>
     </div>
-  </div>
+</div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function () {
+      $('#modalExclusao').on('show.bs.modal', function (event){
+          var btn = $(event.relatedTarget);
+          var foodName = btn.data('food');
+          var route = btn.data('route');
+          $('#foodName').text(foodName);
+          $('form').attr('action', route);
+      })
+    })
+</script>
+@endpush

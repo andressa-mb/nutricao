@@ -14,17 +14,17 @@ class FoodController extends Controller
     use ImageStorage;
 
     /**
-     * Lista dos alimentos existentes no sistema.
+     * Lista dos alimentos existentes no sistema, podendo adicioná-los aos favoritos.
      */
     public function listFoods(){
         return view('food.listFoods', ['foods' => Food::paginate()]);
     }
     //TODOS OS USUÁRIOS
     /**
-     * Lista dos alimentos existentes para seleção dos favoritos.
+     * Lista dos alimentos favoritos do usuário.
      */
-    public function addFavoriteFoods(){
-        return view('food.listToAddFavorites', ['foods' => Food::paginate()]);
+    public function myFavoriteFoods(){
+        return view('food.myFavorites');
     }
 
     /**
@@ -50,15 +50,14 @@ class FoodController extends Controller
     }
 
     /**
-     * ADMIN: lista de alimentos inseridos no sistema.
+     * Deleta alimento favorito do usuário autenticado.
      */
-    public function index()
+    public function destroyFavoriteFood(int $foodId)
     {
-        if($this->isAdmin){
-            return view('food.index', ['foods' => Food::paginate()]);
-        } else {
-            return redirect()->route('main-page')->withErrors('Página apenas para administradores.');
-        }
+      $user = $this->user();
+      $user->foods()->detach($foodId);
+
+      return back()->with('message', 'Excluído com sucesso.');
     }
 
     /**
@@ -139,19 +138,18 @@ class FoodController extends Controller
         $groupId = $request->input('group_type');
         $food->groups()->sync([$groupId]);
         $food->update($validated);
-        return redirect()->route('foods')->with('message', 'Atualizado com sucesso.');
+        return redirect()->route('list-foods')->with('message', 'Atualizado com sucesso.');
     }
 
     /**
-     * Remove o alimento selecionado.
+     * ADMIN: Remove o alimento selecionado.
      */
     public function destroy(int $foodId)
     {
-        if(!$this->isAdmin()){
-            return redirect()->route('main-page')->withErrors('Página apenas para administradores.');
-        }
-
-        Food::findOrFail($foodId)->delete();
-        return redirect()->route('foods')->with('message', 'Excluído com sucesso.');
+      if(!$this->isAdmin()){
+          return redirect()->route('main-page')->withErrors('Página apenas para administradores.');
+      }
+      Food::findOrFail($foodId)->delete();
+      return redirect()->route('list-foods')->with('message', 'Excluído com sucesso.');
     }
 }

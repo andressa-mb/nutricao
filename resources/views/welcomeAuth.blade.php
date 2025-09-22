@@ -15,11 +15,11 @@
             <a href="{{route('my-body-profile')}}" class="col p-5 m-2 border border-primary rounded bg-secondary text-center text-white text-decoration-none">
                 Meu Perfil
             </a>
-            <a href="{{route('add-favorite-foods')}}" class="col p-5 m-2 border border-primary rounded bg-secondary text-center text-white text-decoration-none">
-                Adicionar meus alimentos favoritos
-            </a>
             <a href="{{route('list-foods')}}" class="col p-5 m-2 border border-primary rounded bg-secondary text-center text-white text-decoration-none">
                 Alimentos
+            </a>
+            <a href="{{route('my-favorite-foods')}}" class="col p-5 m-2 border border-primary rounded bg-secondary text-center text-white text-decoration-none">
+                Alimentos favoritos
             </a>
         </div>
     </div>
