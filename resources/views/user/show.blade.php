@@ -21,13 +21,51 @@
                 </div>
                 <div class="card-footer d-flex justify-content-around">
                     <a href="{{route('edit-user', $user)}}" class="btn btn-warning">Editar</a>
-                    <form action="{{route('delete-user', $user)}}" method="POST">
-                        @method('DELETE')
-                        @csrf
-                        <button class="btn btn-danger">Excluir conta</button>
-                    </form>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusao" data-user="{{$user->name}}">Excluir conta</button>
                 </div>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalExclusao" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Excluir usuário</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Tem certeza que deseja excluir a conta do:
+                        <strong id="userName"></strong>
+                    </p>
+                    <p class="text-danger">Essa ação não poderá ser desfeita.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <form action="{{route('delete-user', $user)}}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button class="btn btn-danger">Excluir</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function () {
+        $('#modalExclusao').on('show.bs.modal', function (event){
+            var btn = $(event.relatedTarget);
+            var userName = btn.data('user');
+            $('#userName').text(userName);
+        })
+    })
+</script>
+@endpush
