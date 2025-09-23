@@ -149,7 +149,14 @@ class FoodController extends Controller
       if(!$this->isAdmin()){
           return redirect()->route('main-page')->withErrors('Página apenas para administradores.');
       }
-      Food::findOrFail($foodId)->delete();
+
+      $foodToDelete = Food::find($foodId);
+
+      if(!is_null($foodToDelete->image)){
+        $this->deleteImage($foodToDelete);
+      }
+      $foodToDelete->delete();
+
       return redirect()->route('list-foods')->with('message', 'Excluído com sucesso.');
     }
 }

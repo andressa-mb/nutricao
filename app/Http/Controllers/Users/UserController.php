@@ -164,7 +164,6 @@ class UserController extends Controller
     {
         if($this->userId() == $userId || $this->isAdmin()){
             $userToDelete = User::find($userId);
-
             if(!is_null($userToDelete->image)){
                 $this->deleteImage($userToDelete);
             }

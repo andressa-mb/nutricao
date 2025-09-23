@@ -27,7 +27,7 @@
           <thead class="thead-dark">
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">#</th>
+              <th scope="col">Favoritos</th>
               <th scope="col">Imagem</th>
               <th scope="col">Nome</th>
               <th scope="col">Quantidade</th>
@@ -55,6 +55,11 @@
                     name="foods[]"
                     value="{{ $food->id }}"
                     class="mr-2"
+                    @foreach ($user->foods as $item)
+                      @if ($item->pivot->food_id == $food->id)
+                        checked
+                      @endif
+                    @endforeach
                   >
                 </td>
                 <td>
