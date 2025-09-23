@@ -21,12 +21,16 @@
         </ul>
     </div>
     <div class="card-footer d-flex justify-content-around">
-        <a href="{{route('edit-user', $user)}}" class="btn btn-warning">Editar</a>
+        <a href="{{route('edit-user', $user)}}" class="btn btn-warning">
+          @include('icons.edit')
+        </a>
         <button type="button" class="btn btn-danger" data-toggle="modal"
          data-target="#modalExclusao"
          data-user="{{$user->name}}"
          data-id="{{$user->id}}"
-         data-route="{{route('delete-user', $user)}}">Excluir</button>
+         data-route="{{route('delete-user', $user)}}">
+          @include('icons.delete')
+        </button>
     </div>
 </div>
 

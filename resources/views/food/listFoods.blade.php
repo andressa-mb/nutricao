@@ -23,8 +23,8 @@
     <div class="col-12 d-flex justify-content-center">
       <form action="{{ route('save-favorite-foods') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <table class="table">
-          <thead class="thead-dark">
+        <table class="table table-bordered table-striped">
+          <thead class="thead">
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Favoritos</th>
@@ -79,8 +79,12 @@
                 <td>{{ $food->other_value }} {{ $food->other_type }}</td>
                 @if ($is_admin)
                   <td>
-                    <a href="{{route('edit-food', $food)}}" class="btn btn-warning">Editar</a>
-                    <a class="btn btn-danger" data-toggle="modal" data-target="#modalExclusao" data-route="{{route('delete-food', $food)}}" data-food="{{$food->food_name}}">Excluir</a>
+                    <a href="{{route('edit-food', $food)}}" class="btn btn-warning m-1">
+                      @include('icons.edit')
+                    </a>
+                    <a class="btn btn-danger m-1" data-toggle="modal" data-target="#modalExclusao" data-route="{{route('delete-food', $food)}}" data-food="{{$food->food_name}}">
+                      @include('icons.delete')
+                    </a>
                   </td>
                 @endif
               </tr>

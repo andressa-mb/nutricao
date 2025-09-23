@@ -25,7 +25,7 @@
     @endif
 
     @foreach ($user->foods as $myFavorite)
-      <div class="card my-3 mx-3" style="width: 22rem;">
+      <div class="card my-3 mx-3" style="width: 15rem;">
         @if (!is_null($myFavorite->image))
             <img class="card-img-top" src="{{Storage::url($myFavorite->image->url)}}" alt="{{$myFavorite->image->id}}">
         @endif
@@ -45,7 +45,9 @@
             </ul>
         </div>
         <div class="card-footer d-flex justify-content-around">
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusao" data-food="{{$myFavorite->food_name}}" data-route="{{route('delete-favorite', $myFavorite)}}">Excluir</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusao" data-food="{{$myFavorite->food_name}}" data-route="{{route('delete-favorite', $myFavorite)}}">
+              @include('icons.delete')
+            </button>
         </div>
       </div>
     @endforeach

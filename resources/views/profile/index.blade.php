@@ -66,12 +66,14 @@
                         <p><strong>Data de criação:</strong> {{$user->profile->created_at->format('d/m/Y')}}</p>
                     </div>
 
-                    <div class="card-footer">
+                    <div class="card-footer d-flex justify-content-around">
                         <button type="button" class="btn btn-danger"
                            data-toggle="modal"
                            data-target="#modalExclusao"
                            data-route="{{route('delete-profile')}}"
-                          >Excluir</button>
+                          >
+                          @include('icons.delete')
+                        </button>
                     </div>
                 </div>
             </div>
@@ -101,7 +103,9 @@
                            data-toggle="modal"
                            data-target="#modalExclusao"
                            data-route="{{route('delete-profile-evolution', $item->id)}}"
-                          >Excluir</button>
+                          >
+                          @include('icons.delete')
+                          </button>
                         </div>
                     </div>
                 @endforeach
