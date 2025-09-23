@@ -1,3 +1,8 @@
+@component('components.modals.modal-delete', ['titleModal' => 'Excluir usuário'])
+  <p>Tem certeza que deseja excluir a conta do:
+    <strong id="userName"></strong>
+  </p>
+@endcomponent
 <div class="card my-3" style="width: 22rem;">
     @if (!is_null($user->image))
         <img class="card-img-top" height="250" src="{{Storage::url($user->image->url)}}" alt="{{$user->image->id}}">
@@ -25,35 +30,6 @@
     </div>
 </div>
 
- <div class="modal fade" id="modalExclusao" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Excluir usuário</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Tem certeza que deseja excluir o usuário:
-                    <strong id="userName"></strong>
-                </p>
-                <p class="text-danger">Essa ação não poderá ser desfeita.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    Cancelar
-                </button>
-                <form id="deleteForm" method="POST">
-                    @method('DELETE')
-                    @csrf
-                    <button type="submit" class="btn btn-danger">Excluir conta</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 @push('scripts')
 <script>
     $(document).ready(function () {
@@ -62,7 +38,7 @@
             var userName = btn.data('user');
             var deleteRoute = btn.data('route');
             $('#userName').text(userName);
-            $('#deleteForm').attr('action', deleteRoute);
+            $('form').attr('action', deleteRoute);
         })
     })
 </script>

@@ -75,7 +75,7 @@
                 @if ($is_admin)
                   <td>
                     <a href="{{route('edit-food', $food)}}" class="btn btn-warning">Editar</a>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusao" data-route="{{route('delete-food', $food)}}" data-food="{{$food->food_name}}">Excluir</button>
+                    <a class="btn btn-danger" data-toggle="modal" data-target="#modalExclusao" data-route="{{route('delete-food', $food)}}" data-food="{{$food->food_name}}">Excluir</a>
                   </td>
                 @endif
               </tr>
