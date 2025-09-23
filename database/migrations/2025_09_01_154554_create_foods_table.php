@@ -65,15 +65,15 @@ class CreateFoodsTable extends Migration
         });
 
         DB::table('groups')->insert([
-            ['id' => 1, 'group_type' => 'PÃES E CERAIS'],
-            ['id' => 2, 'group_type' => 'LEITE E DERIVADOS'],
-            ['id' => 3, 'group_type' => 'FRUTAS'],
-            ['id' => 4, 'group_type' => 'VEGETAIS A'],
-            ['id' => 5, 'group_type' => 'VEGETAIS B'],
-            ['id' => 6, 'group_type' => 'CARNES'],
-            ['id' => 7, 'group_type' => 'ARROZ, MASSAS, TUBÉRCULOS'],
-            ['id' => 8, 'group_type' => 'LEGUMINOSAS'],
-            ['id' => 9, 'group_type' => 'CASTANHAS, SEMENTES'],
+            ['group_type' => 'PÃES E CERAIS'],
+            ['group_type' => 'LEITE E DERIVADOS'],
+            ['group_type' => 'FRUTAS'],
+            ['group_type' => 'VEGETAIS A'],
+            ['group_type' => 'VEGETAIS B'],
+            ['group_type' => 'CARNES'],
+            [ 'group_type' => 'ARROZ, MASSAS, TUBÉRCULOS'],
+            ['group_type' => 'LEGUMINOSAS'],
+            ['group_type' => 'CASTANHAS, SEMENTES'],
         ]);
     }
 

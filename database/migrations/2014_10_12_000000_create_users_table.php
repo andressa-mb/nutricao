@@ -20,11 +20,16 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->date('birthday');
+            $table->timestamp('birthday');
             $table->char('sex', 1);
             $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamps(); //cria pela model
+            /*
+              CRIA MANUALMENTE MAS SE TROCAR DE BANCO PODE NÃO HAVER ESSA FUNÇÃO
+              $table->timestamp('created_at', 0)->nullable()->default(DB::raw('NOW()'));
+              $table->timestamp('updated_at', 0)->nullable()->default(DB::raw('NOW()'));
+            */
         });
 
         Schema::create('roles', function (Blueprint $table) {
@@ -46,15 +51,13 @@ class CreateUsersTable extends Migration
             ->cascadeOnUpdate();
         });
 
-
         DB::table('roles')->insert([
-            ['id' => 1, 'role_name' => 'ADMIN'],
-            ['id' => 2, 'role_name' => 'STANDARD'],
+            ['role_name' => 'ADMIN'],
+            ['role_name' => 'STANDARD'],
         ]);
 
         DB::table('users')->insert([
-            ['id' => 1, 'name' => 'Andressa', 'email' => 'andressa@email.com', 'birthday' => '1993-08-26', 'sex' => 'F', 'password' => Hash::make('12345678'), "created_at" => "2025-09-10",
-            "updated_at" => "2025-09-10"]
+            ['name' => 'Andressa', 'email' => 'andressa@email.com', 'birthday' => '1993-08-26', 'sex' => 'F', 'password' => Hash::make('12345678'), "created_at" => now()->subDays(5)->format('Y-m-d'), "updated_at" => now()->subDays(5)->format('Y-m-d')]
         ]);
 
         DB::table('user_roles')->insert([

@@ -21,7 +21,6 @@ class CreateProfilesTable extends Migration
             ->cascadeOnUpdate()
             ->cascadeOnDelete()
             ->unique();
-            $table->date('birthday');
             $table->double('weight');
             $table->double('height');
             $table->double('goal');

@@ -7,16 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
-class ProfileHistory extends Model
+class ProfileEvolution extends Model
 {
-    public $timestamps = false;
-    protected $table = 'profile_histories';
+    protected $table = 'profile_evolutions';
     protected $fillable = [
-        'profile_id', 'weight_prev', 'goal_prev', 'metabolism_prev', 'recorded_at',
-    ];
-
-    protected $casts = [
-        'recorded_at' => 'datetime',
+        'profile_id', 'weight_current', 'metabolism_current', 'created_at', 'updated_at',
     ];
 
     public function profile(): BelongsTo {
@@ -26,4 +21,9 @@ class ProfileHistory extends Model
     public function image(): MorphOne {
         return $this->morphOne(Image::class, 'img');
     }
+
+    public function getRecordedAtAttribute() {
+      return $this->created_at->format('d/m/Y');
+    }
+
 }

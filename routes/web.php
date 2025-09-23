@@ -39,12 +39,25 @@ Route::get('/users', 'Users\UserController@index')->name('users');
 
 //FOOD
 //TODOS USUÁRIOS
+Route::get('/list-foods', 'Foods\FoodController@listFoods')->name('list-foods');
 Route::post('/favorite-foods', 'Foods\FoodController@storeFavoriteFood')->name('save-favorite-foods');
-Route::get('/list-foods', 'Foods\FoodController@listOfFoods')->name('list-foods');
+Route::get('/my-favorite-foods', 'Foods\FoodController@myFavoriteFoods')->name('my-favorite-foods');
+Route::delete('/{foodId}/delete-favorite', 'Foods\FoodController@destroyFavoriteFood')->name('delete-favorite');
 //SOMENTE ADMIN
-Route::get('/foods', 'Foods\FoodController@index')->name('foods');
+//Route::get('/foods', 'Foods\FoodController@index')->name('foods');
 Route::get('/create-food', 'Foods\FoodController@create')->name('create-food');
 Route::post('/save-food', 'Foods\FoodController@store')->name('save-food');
 Route::get('/{foodId}/edit-food', 'Foods\FoodController@edit')->name('edit-food');
 Route::put('/{foodId}/update-food', 'Foods\FoodController@update')->name('update-food');
 Route::delete('/{foodId}/delete-food', 'Foods\FoodController@destroy')->name('delete-food');
+
+//PROFILE
+Route::get('/my-body-profile', 'Profiles\ProfileController@index')->name('my-body-profile');
+Route::get('/create/profile', 'Profiles\ProfileController@create')->name('create-profile');
+Route::post('/save/profile', 'Profiles\ProfileController@store')->name('save-profile');
+Route::delete('/delete/profile', 'Profiles\ProfileController@destroy')->name('delete-profile');
+
+//PROFILE EVOLUTION
+Route::get('/new-measures', 'Profiles\ProfileController@createProfileEvolution')->name('new-measures');
+Route::post('/save/new-measures', 'Profiles\ProfileController@storeProfileEvolution')->name('save-measures');
+Route::delete('/delete/profile-evolution/{evolution}', 'Profiles\ProfileController@destroyEvolution')->name('delete-profile-evolution');

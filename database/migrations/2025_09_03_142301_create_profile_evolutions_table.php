@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProfileHistoriesTable extends Migration
+class CreateProfileEvolutionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,16 @@ class CreateProfileHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('profile_histories', function (Blueprint $table) {
+        Schema::create('profile_evolutions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('profile_id')
             ->references('id')
             ->on('profiles')
             ->cascadeOnDelete()
             ->cascadeOnUpdate();
-            $table->double('weight_prev');
-            $table->double('goal_prev');
-            $table->double('metabolism_prev')->nullable();
-            $table->date('recorded_at');
+            $table->double('weight_current');
+            $table->double('metabolism_current')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -34,6 +33,6 @@ class CreateProfileHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profile_histories');
+        Schema::dropIfExists('profile_evolutions');
     }
 }
